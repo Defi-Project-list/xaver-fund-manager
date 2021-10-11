@@ -7,7 +7,7 @@ env:
   ETHERSCAN_TOKEN: ${{ secrets.ETHERSCAN_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   WEB3_INFURA_PROJECT_ID: ${{ secrets.WEB3_INFURA_PROJECT_ID }}
-  # BROWNIE_DEV_MNEMONIC: ${{ secrets.BROWNIE_DEV_MNEMONIC }}
+  BROWNIE_DEV_MNEMONIC: ${{ secrets.BROWNIE_DEV_MNEMONIC }}
 
   # increasing available memory for node reduces issues with ganache crashing
   # https://nodejs.org/api/cli.html#cli_max_old_space_size_size_in_megabytes
