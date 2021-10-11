@@ -15,7 +15,7 @@ networks:
   mainnet-fork:
     cmd_settings:
       port: 8545
-      mnemonic: "${BROWNIE_DEV_MNEMONIC}"
+      # mnemonic: "${BROWNIE_DEV_MNEMONIC}"
 
 compiler:
   solc:
