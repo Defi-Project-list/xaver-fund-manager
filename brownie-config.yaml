@@ -4,7 +4,7 @@
 dotenv: .env
 
 networks:
-  default: development
+  default: mainnet-fork
   # development:
     # cmd_settings:
       # port: 8545
