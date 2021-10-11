@@ -35,10 +35,10 @@ jobs:
     - name: Install Ganache
       run: npm install -g ganache-cli@6.10.2
 
-    - name: Setup Python 3.8
+    - name: Setup Python 3.7
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.7
 
     - name: Install Requirements
       run: pip install -r requirements.txt
