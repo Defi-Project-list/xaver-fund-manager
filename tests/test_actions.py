@@ -1,5 +1,5 @@
 from brownie import accounts
 
 def test_github_actions():
-    assert accounts[0].balance() > 1000000000000000000000
+    assert accounts[10].balance() > 1000000000000000000000
 
