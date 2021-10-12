@@ -8,6 +8,7 @@ networks:
   development: # used for on Github Actions
     cmd_settings:
       port: 8545
+      # mnemonic: "${BROWNIE_DEV_MNEMONIC}"
       fork: "https://mainnet.infura.io/v3/${WEB3_INFURA_PROJECT_ID}"
       default_balance: 1000
       unlock: "0x21a31Ee1afC51d94C2eFcCAa2092aD1028285549" # account with lots of DAI, can also be a list of accounts
