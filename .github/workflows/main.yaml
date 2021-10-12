@@ -42,5 +42,8 @@ jobs:
     - name: Install Requirements
       run: pip install -r requirements.txt
 
+    - name: print to screen
+    - run: cat brownie networks list
+
     - name: Run Tests
       run: brownie test # --network development
