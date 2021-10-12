@@ -1,8 +1,6 @@
 # https://eth-brownie.readthedocs.io/en/stable/config.html
 # CMD settings: https://eth-brownie.readthedocs.io/en/stable/network-management.html
 
-dotenv: .env
-
 networks:
   default: development
   development: # used for on Github Actions
