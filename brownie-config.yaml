@@ -14,7 +14,7 @@ networks:
   mainnet-fork:
     cmd_settings:
       port: 8545
-      # fork: "http://localhost:8545"
+      chain_id: 1337
       # mnemonic: "${BROWNIE_DEV_MNEMONIC}"
 
 compiler:
