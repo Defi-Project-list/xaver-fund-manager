@@ -23,7 +23,6 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
-
   solidity: "0.7.6",
   networks: {
     ropsten: {
@@ -33,9 +32,9 @@ const config: HardhatUserConfig = {
     },
     hardhat: {
       forking: {
-        url: `${process.env.PROVIDER_FORKING}`
+        url: process.env.WEB3_INFURA_PROJECT_ID || "",
+        // blockNumber: 13475333,
       },
-      chainId: 1
     },
   },
   gasReporter: {
