@@ -31,9 +31,11 @@ describe("Buy variable tokens", async () => {
     // the provider calls the TransferFrom => approve
     await erc20USDC.connect(owner).approve(compoundUSDCProvider, amount)
 
-    const price = await smartYield.connect(owner).price()
     const tx = await smartYield.connect(owner).buyTokens(amount, 0, 1636155524)
+    const tokenBalance = await smartYield.balanceOf(owner.address)
+    console.log(`token balance: ${formatUnits(tokenBalance, 6)}`)
 
+    // expect(tokenBalance).to.be.greaterThan(0)
   });
 });
 
