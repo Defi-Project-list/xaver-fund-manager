@@ -1,11 +1,11 @@
 import { expect } from "chai";
-import { Wallet } from "ethers"
+import { Signer, Wallet } from "ethers"
 import { ethers, waffle } from "hardhat";
 
 import SmartYieldArtifact from '../artifacts/contracts/SmartYield.sol/SmartYield.json';
 import { SmartYield } from '../typechain';
 
-import { getUSDCSigner, parseUnits, erc20, formatUnits } from './helpers';
+import { getUSDCSigner, parseUnits, erc20, formatUnits } from './helpers/helpers';
 
 const bb_cUSDC = '0x4B8d90D68F26DEF303Dcb6CFc9b63A1aAEC15840'
 const usdc = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";

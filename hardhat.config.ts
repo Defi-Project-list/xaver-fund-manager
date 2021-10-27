@@ -34,6 +34,7 @@ const config: HardhatUserConfig = {
       forking: {
         url: `${process.env.PROVIDER_FORKING}`
       },
+      initialBaseFeePerGas: 0,
       chainId: 1
     },
   },

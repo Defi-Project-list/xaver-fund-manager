@@ -1,9 +1,8 @@
 import 'tsconfig-paths/register';
 
-import { deployBondModel, deployCompoundController, deployCompoundProvider, deployJuniorBond, deploySeniorBond, deploySmartYield, deployYieldOracle } from '@testhelp/index';
+import { deployBondModel, deployCompoundController, deployCompoundProvider, deployJuniorBond, deploySeniorBond, deploySmartYield, deployYieldOracle } from '../test/helpers/deploy';
 import { Wallet, BigNumber as BN } from 'ethers';
 import { run, ethers } from 'hardhat';
-import { ERC20Factory } from '@typechain/ERC20Factory';
 
 const A_HOUR = 60 * 60;
 

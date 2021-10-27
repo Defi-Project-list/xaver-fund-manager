@@ -1,7 +1,7 @@
 require('@ethereum-waffle/compiler');
 const { ethers, network, waffle } = require("hardhat");
-const erc20ABI = require('../abis/erc20.json');
-const cTokenABI = require('../abis/cToken.json');
+const erc20ABI = require('../../abis/erc20.json');
+const cTokenABI = require('../../abis/cToken.json');
 const provider = waffle.provider;
 
 

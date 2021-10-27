@@ -1,5 +1,5 @@
 import { deployContract } from 'ethereum-waffle';
-import { Signer, Wallet } from 'ethers';
+import { Signer, Wallet, BigNumberish } from 'ethers';
 
 import SmartYieldArtifact from '../../artifacts/contracts/SmartYield.sol/SmartYield.json';
 import { SmartYield } from '../../typechain/SmartYield';
