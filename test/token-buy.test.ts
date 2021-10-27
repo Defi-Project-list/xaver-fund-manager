@@ -23,19 +23,34 @@ describe("Buy variable tokens", async () => {
     smartYield = new ethers.Contract(bb_cUSDC, SmartYieldArtifact.abi, waffle.provider);
   });
 
-  it("Should buy tokens and receive LP tokens", async () => {
+  it("Should buy tokens and receive LP tokens / Sell and withdraw USDC", async () => {
     // SEND USDC to owner for spending
     const amount = parseUnits('2000.0', 6);
+    const minTokens = 0;
+    const deadline = 1636155524;
     await erc20USDC.connect(USDCSigner).transfer(owner.address, amount);
 
-    // the provider calls the TransferFrom => approve
-    await erc20USDC.connect(owner).approve(compoundUSDCProvider, amount)
+    // the provider calls the TransferFrom => approve Provider
+    await erc20USDC.connect(owner).approve(compoundUSDCProvider, amount);
 
-    const tx = await smartYield.connect(owner).buyTokens(amount, 0, 1636155524)
-    const tokenBalance = await smartYield.balanceOf(owner.address)
-    console.log(`token balance: ${formatUnits(tokenBalance, 6)}`)
+    // Buy tokens with owner account
+    const buy = await smartYield.connect(owner).buyTokens(amount, minTokens, deadline);
+    const USDCBalance = await erc20USDC.balanceOf(owner.address);
+    const tokenBalance = await smartYield.balanceOf(owner.address);
+    console.log(`LP token balance: ${(formatUnits(tokenBalance, 6))}`);
 
-    // expect(tokenBalance).to.be.greaterThan(0)
+    expect(Number(tokenBalance)).to.be.greaterThan(0)
+    expect(USDCBalance).to.equal(0);
+
+    // Sell tokens and withdraw USDC
+    const sell = await smartYield.connect(owner).sellTokens(tokenBalance, minTokens, deadline)
+    const USDCBalanceAfter = await erc20USDC.balanceOf(owner.address);
+    const tokenBalanceAfter = await smartYield.balanceOf(owner.address);
+    console.log(`USDC Balance after sell: ${USDCBalanceAfter}`)
+    console.log(`Token Balance after sell: ${tokenBalanceAfter}`)
+
+    expect(tokenBalanceAfter).to.equal(0);
+    expect(Number(USDCBalanceAfter)).to.be.greaterThan(0);
   });
 });
 
