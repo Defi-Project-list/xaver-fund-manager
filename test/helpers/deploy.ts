@@ -2,26 +2,26 @@ import { deployContract } from 'ethereum-waffle';
 import { Signer, Wallet, BigNumberish } from 'ethers';
 
 import SmartYieldArtifact from '../../artifacts/contracts/SmartYield.sol/SmartYield.json';
-import { SmartYield } from '../../typechain/SmartYield';
+import { SmartYield } from '@typechain/SmartYield';
 
 import YieldOracleArtifact from './../../artifacts/contracts/oracle/YieldOracle.sol/YieldOracle.json';
-import { YieldOracle } from '../../typechain/YieldOracle';
-import { IBondModel } from '../../typechain/IBondModel';
+import { YieldOracle } from '@typechain/YieldOracle';
+import { IBondModel } from '@typechain/IBondModel';
 
 import BondModelV1Artifact from './../../artifacts/contracts/model/BondModelV1.sol/BondModelV1.json';
-import { BondModelV1 } from '../../typechain/BondModelV1';
+import { BondModelV1 } from '@typechain/BondModelV1';
 
 import CompoundControllerArtifact from './../../artifacts/contracts/providers/CompoundController.sol/CompoundController.json';
-import { CompoundController } from '../../typechain/CompoundController';
+import { CompoundController } from '@typechain/CompoundController';
 
 import CompoundProviderArtifact from './../../artifacts/contracts/providers/CompoundProvider.sol/CompoundProvider.json';
-import { CompoundProvider } from '../../typechain/CompoundProvider';
+import { CompoundProvider } from '@typechain/CompoundProvider';
 
 import JuniorBondArtifact from './../../artifacts/contracts/JuniorBond.sol/JuniorBond.json';
-import { JuniorBond } from '../../typechain/JuniorBond';
+import { JuniorBond } from '@typechain/JuniorBond';
 
 import SeniorBondArtifact from './../../artifacts/contracts/SeniorBond.sol/SeniorBond.json';
-import { SeniorBond } from '../../typechain/SeniorBond';
+import { SeniorBond } from '@typechain/SeniorBond';
 
 export const deployBondModel = (deployerSign: Wallet): Promise<BondModelV1> => {
   return (deployContract(deployerSign, BondModelV1Artifact, [])) as Promise<BondModelV1>;

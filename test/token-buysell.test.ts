@@ -3,7 +3,7 @@ import { Signer, Wallet } from "ethers"
 import { ethers, waffle } from "hardhat";
 
 import SmartYieldArtifact from '../artifacts/contracts/SmartYield.sol/SmartYield.json';
-import { SmartYield } from '../typechain';
+import { SmartYield } from '@typechain/SmartYield';
 
 import { getUSDCSigner, parseUnits, erc20, formatUnits } from './helpers/helpers';
 
