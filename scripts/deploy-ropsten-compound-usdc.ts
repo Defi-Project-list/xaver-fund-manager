@@ -50,14 +50,6 @@ async function main() {
   await controller.setGuardian(dao);
   await controller.setDao(dao);
 
-  console.log('CONF --------');
-  console.log('DAO:', dao);
-  console.log('cUSDC:', cUSDC);
-  console.log('COMP:', COMP);
-  console.log('USDC:', USDC);
-  console.log('WETH:', WETH);
-  console.log('uniswapPath:', uniswapPath);
-  console.log('');
   console.log('DEPLOYED ----');
   console.log('bondModel:', bondModel.address);
   console.log('compoundProvider:', pool.address);

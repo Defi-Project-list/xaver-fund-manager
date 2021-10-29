@@ -39,7 +39,9 @@ const config: HardhatUserConfig = {
   networks: {
     ropsten: {
       url: `${process.env.INFURA_KEY}`,
-      accounts: [`${process.env.ROPSTEN_PRIVATE_KEY}`],
+      accounts: {
+        mnemonic: process.env.MNEMONIC
+      },
       chainId: 3,
       gas: 25000000,
       blockGasLimit: 0x1fffffffffffff,
