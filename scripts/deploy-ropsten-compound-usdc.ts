@@ -6,25 +6,23 @@ import { run, ethers } from 'hardhat';
 
 const A_HOUR = 60 * 60;
 
-const seniorBondCONF = { name: 'BarnBridge cUSDC sBOND', symbol: 'bbscUSDC' };
-const juniorBondCONF = { name: 'BarnBridge cUSDC jBOND', symbol: 'bbjcUSDC' };
-const juniorTokenCONF = { name: 'BarnBridge cUSDC', symbol: 'bbcUSDC' };
+const seniorBondCONF = { name: 'Tester cUSDC sBOND', symbol: 'TVaUSDC' };
+const juniorBondCONF = { name: 'Tester cUSDC jBOND', symbol: 'TFiUSDC' };
+const juniorTokenCONF = { name: 'Tester cUSDC', symbol: 'TTokUSDC' };
 
 const oracleCONF = { windowSize: A_HOUR, granularity: 4 };
 
 // barnbridge
 const decimals = 6; // same as USDC
-const dao = '0x930e52B96320d7dBbfb6be458e5EE0Cd3E5E5Dac';
+const dao = '0xCA11d776673a8058DaFF6fbA16223120af8fF0B2';
 const feesOwner = dao;
 
-// externals ---
+// compound ROPSTEN
+const cUSDC = '0x2973e69b20563bcc66dc63bde153072c33ef37fe';
+const COMP = '0xf76d4a441e4ba86a923ce32b89aff89dbccaa075';
 
-// compound
-const cUSDC = '0x4a92e71227d294f041bd82dd8f78591b75140d63';
-const COMP = '0x61460874a7196d6a22d1ee4922473664b3e95270';
-
-const USDC = '0xb7a4f3e9097c08da09517b5ab877f7a917224ede';
-const WETH = '0xd0A1E359811322d97991E03f863a0C30C2cF029C';
+const USDC = '0x07865c6e87b9f70255377e024ace6630c1eaa37f';
+const WETH = '0xc778417e063141139fce010982780140aa0cd5ab';
 const uniswapPath = [COMP, WETH, USDC];
 
 async function main() {

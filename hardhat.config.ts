@@ -1,11 +1,14 @@
 import * as dotenv from "dotenv";
 
 import { HardhatUserConfig, task } from "hardhat/config";
-import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
-import "@typechain/hardhat";
-import "hardhat-gas-reporter";
-import "solidity-coverage";
+import 'hardhat-gas-reporter';
+import 'solidity-coverage';
+import '@nomiclabs/hardhat-waffle';
+import '@nomiclabs/hardhat-etherscan';
+import '@nomiclabs/hardhat-web3';
+import 'hardhat-typechain';
+import 'hardhat-contract-sizer';
+import 'hardhat-abi-exporter';
 
 dotenv.config();
 
@@ -34,18 +37,13 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    // ropsten: {
-    //   url: `${process.env.INFURA_KEY}`,
-    //   accounts: [`${process.env.ROPSTEN_PRIVATE_KEY}`]
-    // },
-    // coverage: {
-    //   forking: {
-    //     url: `${process.env.PROVIDER_FORKING}`,
-    //     blockNumber: 12525794, 
-    //   },
-    //   allowUnlimitedContractSize: true,
-    //   url: 'http://localhost:8555',
-    // },
+    ropsten: {
+      url: `${process.env.INFURA_KEY}`,
+      accounts: [`${process.env.ROPSTEN_PRIVATE_KEY}`],
+      chainId: 3,
+      gas: 25000000,
+      blockGasLimit: 0x1fffffffffffff,
+    },
     
     hardhat: {
       forking: {
@@ -53,7 +51,9 @@ const config: HardhatUserConfig = {
         blockNumber: 12525794, 
       },
       allowUnlimitedContractSize: true,
-      gas: 1200000000,
+      throwOnTransactionFailures: true,
+      throwOnCallFailures: true,
+      gas: 25000000,
       blockGasLimit: 0x1fffffffffffff,
       chainId: 1,
       gasMultiplier: 1.5,

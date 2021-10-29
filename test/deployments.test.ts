@@ -38,15 +38,15 @@ describe("Deploying contracts", async () => {
     const juniorBond = await deployJuniorBond(owner, smartYield.address, juniorBondCONF.name, juniorBondCONF.symbol);
 
     const controller = await deployCompoundController(owner, pool.address, smartYield.address, bondModel.address, uniswapPath);
-    // const oracle = await deployYieldOracle(owner, controller.address, oracleCONF.windowSize, oracleCONF.granularity);
+    const oracle = await deployYieldOracle(owner, controller.address, oracleCONF.windowSize, oracleCONF.granularity);
 
-    // await controller.setOracle(oracle.address);
-    // await controller.setFeesOwner(dao);
-    // await smartYield.setup(controller.address, pool.address, seniorBond.address, juniorBond.address);
-    // await pool.setup(smartYield.address, controller.address);
+    await controller.setOracle(oracle.address);
+    await controller.setFeesOwner(dao);
+    await smartYield.setup(controller.address, pool.address, seniorBond.address, juniorBond.address);
+    await pool.setup(smartYield.address, controller.address);
 
-    // await controller.setGuardian(dao);
-    // await controller.setDao(dao);
+    await controller.setGuardian(dao);
+    await controller.setDao(dao);
   
 
     console.log(bondModel.address)
@@ -54,6 +54,8 @@ describe("Deploying contracts", async () => {
     console.log(smartYield.address)
     console.log(seniorBond.address)
     console.log(juniorBond.address)
+    console.log(controller.address)
+    console.log(oracle.address)
   });
 
   it("Should deploy contracts", async () => {

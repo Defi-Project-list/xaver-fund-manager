@@ -1,0 +1,22 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "prevCTokenBalance_",
+        "type": "uint256"
+      }
+    ],
+    "name": "_afterCTokenBalanceChange",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_beforeCTokenBalanceChange",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
