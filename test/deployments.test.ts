@@ -13,9 +13,9 @@ const oracleCONF = { windowSize: A_HOUR, granularity: 4 };
 
 // mainnet addresses
 const USDC = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
-const compoundUSDCProvider = '0xDAA037F99d168b552c0c61B7Fb64cF7819D78310'
+const compoundUSDCProvider = '0xDAA037F99d168b552c0c61B7Fb64cF7819D78310';
 const COMP = '0xc00e94cb662c3520282e6f5717214004a7f26888';
-const cUSDC = '0x39aa39c021dfbae8fac545936693ac917d5e7563'
+const cUSDC = '0x39aa39c021dfbae8fac545936693ac917d5e7563';
 const WETH = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';
 
 const dao = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'; // DUMMIEEEEE
@@ -48,7 +48,6 @@ describe("Deploying contracts", async () => {
     await controller.setGuardian(dao);
     await controller.setDao(dao);
   
-
     console.log(bondModel.address)
     console.log(pool.address)
     console.log(smartYield.address)
