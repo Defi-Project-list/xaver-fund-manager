@@ -1,7 +1,7 @@
 import { deployContract } from 'ethereum-waffle';
 import { Signer, Wallet, BigNumberish } from 'ethers';
 
-import SmartYieldArtifact from '../../artifacts/contracts/SmartYield.sol/SmartYield.json';
+import SmartYieldArtifact from './../../artifacts/contracts/SmartYield.sol/SmartYield.json';
 import { SmartYield } from '@typechain/SmartYield';
 
 import YieldOracleArtifact from './../../artifacts/contracts/oracle/YieldOracle.sol/YieldOracle.json';
@@ -26,9 +26,16 @@ import { SeniorBond } from '@typechain/SeniorBond';
 import YearnProviderMockArtifact from './../../artifacts/contracts/providers/YearnProviderMock.sol/YearnProviderMock.json';
 import { YearnProviderMock } from '@typechain/YearnProviderMock';
 
+import YearnControllerMockArtifact from './../../artifacts/contracts/providers/YearnControllerMock.sol/YearnControllerMock.json';
+import { YearnControllerMock } from '@typechain/YearnProviderMock';
+
 
 export const deployYearnProviderMock = (deployerSign: Wallet): Promise<YearnProviderMock> => {
   return (deployContract(deployerSign, YearnProviderMockArtifact, [])) as Promise<YearnProviderMock>;
+};
+
+export const deployYearnControllerMock = (deployerSign: Wallet): Promise<YearnControllerMock> => {
+  return (deployContract(deployerSign, YearnControllerMockArtifact, [])) as Promise<YearnControllerMock>;
 };
 
 export const deployBondModel = (deployerSign: Wallet): Promise<BondModelV1> => {

@@ -7,7 +7,7 @@ import { deployYearnProviderMock} from "./helpers/deploy";
 
 import { getUSDCSigner, erc20, formatUSDC, parseUSDC } from './helpers/helpers';
 
-const usdc = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+const usdc = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48';
 
 describe("Deploy Contract and interact with Yearn", async () => {
   let yearnProviderMock : any, owner : any, addr1 : any, addr2 : any, USDCSigner : any, erc20USDC : any, decimals : number
