@@ -147,10 +147,8 @@ contract YearnProvider is IProvider {
       onlySmartYieldOrController
     {
         uint256 balanceBefore = IERC20(uToken).balanceOf(address(this));
-        console.log("balance Before after %s", balanceBefore);
         IERC20(uToken).safeTransferFrom(from_, address(this), underlyingAmount_);
         uint256 balanceAfter = IERC20(uToken).balanceOf(address(this));
-        console.log("balance After %s", balanceAfter);
         require(
           0 == (balanceAfter - balanceBefore - underlyingAmount_),
           "PPC: _takeUnderlying amount"

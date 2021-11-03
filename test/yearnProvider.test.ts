@@ -26,14 +26,15 @@ describe("Deploy Contract and interact with Yearn", async () => {
 
   it("Should deposit and withdraw tokens from Yearn", async () => {
     const amountUSDC = parseUSDC('1000000.0'); // 1m
+    const fee = 0
     await erc20USDC.connect(USDCSigner).transfer(addr1.address, amountUSDC);
     await erc20USDC.connect(addr1).approve(yearnProvider.address, amountUSDC)
 
     console.log(`-------------------------Deposit----------------------`)  
     await yearnProvider.connect(addr1)._takeUnderlying(addr1.address, amountUSDC);
+    await yearnProvider.connect(addr1)._depositProvider(amountUSDC, fee);
 
     const balance = await yearnProvider.balance();
     console.log(`token balance contract ${formatUSDC(balance)}`)
-
   });
 });
