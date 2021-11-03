@@ -227,7 +227,7 @@ contract YearnProvider is IProvider {
       console.log("price per share %s", price);
       uint256 balanceShares = IYUSDC(yToken).balanceOf(address(this));
       console.log("Number of shares in contract %s", balanceShares);
-      return (balanceShares * price);
+      return (balanceShares * price) / 1e6;
   }
 
     function transferFees()

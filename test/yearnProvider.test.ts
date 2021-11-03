@@ -1,11 +1,9 @@
-import { expect } from "chai";
+import chai, { expect } from "chai";
 import { Signer, Wallet } from "ethers"
 import { ethers, waffle } from "hardhat";
-const { time } = require('@openzeppelin/test-helpers');
-
 import { deployYearnProvider} from "./helpers/deploy";
-
 import { getUSDCSigner, erc20, formatUSDC, parseUSDC } from './helpers/helpers';
+const { time } = require('@openzeppelin/test-helpers');
 
 const usdc = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
 const yusdc = '0x5f18C75AbDAe578b483E5F43f12a39cF75b973a9'
@@ -25,7 +23,7 @@ describe("Deploy Contract and interact with Yearn", async () => {
   });
 
   it("Should deposit and withdraw tokens from Yearn", async () => {
-    const amountUSDC = parseUSDC('1000000.0'); // 1m
+    const amountUSDC = parseUSDC('1000000'); // 1m
     const fee = 0
     await erc20USDC.connect(USDCSigner).transfer(addr1.address, amountUSDC);
     await erc20USDC.connect(addr1).approve(yearnProvider.address, amountUSDC)
@@ -36,5 +34,7 @@ describe("Deploy Contract and interact with Yearn", async () => {
 
     const balance = await yearnProvider.balance();
     console.log(`token balance contract ${formatUSDC(balance)}`)
+
+    expect(Number(formatUSDC(balance))).to.be.closeTo(Number(formatUSDC(amountUSDC)), 2)
   });
 });
