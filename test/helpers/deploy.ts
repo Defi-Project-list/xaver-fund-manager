@@ -27,19 +27,19 @@ import YearnProviderMockArtifact from './../../artifacts/contracts/providers/Yea
 import { YearnProviderMock } from '@typechain/YearnProviderMock';
 
 import YearnControllerMockArtifact from './../../artifacts/contracts/providers/YearnControllerMock.sol/YearnControllerMock.json';
-import { YearnControllerMock } from '@typechain/YearnProviderMock';
+import { YearnControllerMock } from '@typechain/YearnControllerMock';
 
 
 export const deployYearnProviderMock = (deployerSign: Wallet): Promise<YearnProviderMock> => {
   return (deployContract(deployerSign, YearnProviderMockArtifact, [])) as Promise<YearnProviderMock>;
 };
 
-export const deployYearnControllerMock = (deployerSign: Wallet): Promise<YearnControllerMock> => {
-  return (deployContract(deployerSign, YearnControllerMockArtifact, [])) as Promise<YearnControllerMock>;
-};
-
 export const deployBondModel = (deployerSign: Wallet): Promise<BondModelV1> => {
   return (deployContract(deployerSign, BondModelV1Artifact, [])) as Promise<BondModelV1>;
+};
+
+export const deployYearnControllerMock = (deployerSign: Wallet, poolAddress: string, bondModelAddress: string): Promise<YearnControllerMock> => {
+  return (deployContract(deployerSign, YearnControllerMockArtifact, [poolAddress, bondModelAddress])) as Promise<YearnControllerMock>;
 };
 
 export const deployCompoundController = (deployerSign: Wallet, poolAddress: string, smartYieldAddress: string, bondModelAddress: string, uniswapPath: string[] = []): Promise<CompoundController> => {

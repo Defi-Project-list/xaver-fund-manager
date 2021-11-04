@@ -11,6 +11,14 @@ import "./../oracle/IYieldOracle.sol";
 import "./../oracle/IYieldOraclelizable.sol";
 
 contract YearnControllerMock is IController, IYearnCumulator, IYieldOraclelizable {
+    // modifier onlyPool {
+    //   require(
+    //     msg.sender == pool,
+    //     "AC: only pool"
+    //   );
+    //   _;
+    // }
+    
     constructor(
       address pool_,
       address bondModel_
@@ -22,11 +30,37 @@ contract YearnControllerMock is IController, IYearnCumulator, IYieldOraclelizabl
       setBondMaxRatePerDay(821917808219178);
       setBondModel(bondModel_);
     }
-    function providerRatePerDay() public returns (uint256) {
+    function providerRatePerDay() public override virtual returns (uint256) {
       return IYieldOracle(oracle).consult(1 days);
     //   return MathUtils.min(
     //     MathUtils.min(BOND_MAX_RATE_PER_DAY, spotDailyRate()),
     //     IYieldOracle(oracle).consult(1 days)
     //   );
+    }
+
+    function _beforeCTokenBalanceChange()
+      external override
+      // onlyPool
+    { }
+
+    function _afterCTokenBalanceChange()
+      external override
+      // onlyPool
+    {
+      updateCumulativesInternal();
+      IYieldOracle(oracle).update();
+    }
+
+    function cumulatives()
+      external override
+      returns (uint256)
+    {
+
+    }
+
+    function updateCumulativesInternal()
+      private
+    {
+
     }
 }
