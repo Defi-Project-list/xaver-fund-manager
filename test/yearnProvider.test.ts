@@ -2,8 +2,7 @@ import chai, { expect } from "chai";
 import { Signer, Wallet } from "ethers"
 import { ethers, waffle } from "hardhat";
 import { deployYearnProvider} from "./helpers/deploy";
-import { getUSDCSigner, erc20, formatUSDC, parseUSDC } from './helpers/helpers';
-const { time } = require('@openzeppelin/test-helpers');
+import { getUSDCSigner, erc20, formatUSDC, parseUSDC, skipTimeDays } from './helpers/helpers';
 
 const usdc = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
 const yusdc = '0x5f18C75AbDAe578b483E5F43f12a39cF75b973a9'
@@ -18,8 +17,6 @@ describe("Deploy Contract and interact with Yearn", async () => {
 
     USDCSigner = await getUSDCSigner();
     erc20USDC = await erc20(usdc);
-
-    console.log(yearnProvider.address)
   });
 
   it("Should deposit and withdraw tokens from Yearn", async () => {
@@ -35,6 +32,22 @@ describe("Deploy Contract and interact with Yearn", async () => {
     const balance = await yearnProvider.balance();
     console.log(`token balance contract ${formatUSDC(balance)}`)
 
+    // expect contract balance to be close to amount deposited
     expect(Number(formatUSDC(balance))).to.be.closeTo(Number(formatUSDC(amountUSDC)), 2)
+
+    // skip blocks
+    console.log(await ethers.provider.getBlockNumber())
+    await skipTimeDays(4)
+    console.log(await ethers.provider.getBlockNumber())
+
+    console.log(`-------------------------Withdraw----------------------`) 
+    await yearnProvider.connect(addr1)._withdrawProvider(balance, fee);
+    await yearnProvider.connect(addr1)._sendUnderlying(addr1.address, balance);
+    await yearnProvider.balance();
+
+    const USDCBalance = await erc20USDC.balanceOf(addr1.address);
+    console.log(`USDC balance ${formatUSDC(USDCBalance)}`)
+
+    expect(Number(formatUSDC(USDCBalance))).to.be.closeTo(Number(formatUSDC(amountUSDC)), 2)
   });
 });

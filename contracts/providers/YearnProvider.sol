@@ -43,7 +43,7 @@ contract YearnProvider is IProvider {
     // claim token (ie. yDAI)
     address public yToken;
 
-    // cToken.balanceOf(this) measuring only deposits by users (excludes direct cToken transfers to pool)
+    // yToken.balanceOf(this) measuring only deposits by users (excludes direct yToken transfers to pool)
     uint256 public yTokenBalance;
 
     uint256 public exchangeRateCurrentCached;
@@ -210,7 +210,9 @@ contract YearnProvider is IProvider {
         underlyingFees = underlyingFees.add(takeFees_);
 
         uint256 price = IYUSDC(yToken).pricePerShare();
-        uint256 numberOfSharesWithdraw = underlyingAmount_.div(price); 
+        uint256 numberOfSharesWithdraw = underlyingAmount_.div(price).mul(1e6); 
+
+        console.log("number of shares to withdraw %s", numberOfSharesWithdraw);
 
         // ICompoundCumulator(controller)._beforeCTokenBalanceChange();
         IYUSDC(yToken).withdraw(numberOfSharesWithdraw);
@@ -225,8 +227,10 @@ contract YearnProvider is IProvider {
     function balance() external view returns(uint256) {
       uint256 price = IYUSDC(yToken).pricePerShare();
       console.log("price per share %s", price);
+
       uint256 balanceShares = IYUSDC(yToken).balanceOf(address(this));
       console.log("Number of shares in contract %s", balanceShares);
+
       return (balanceShares * price) / 1e6;
   }
 
@@ -238,7 +242,7 @@ contract YearnProvider is IProvider {
       underlyingFees = 0;
 
       uint256 fees = IERC20(uToken).balanceOf(address(this));
-      address to = 0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8;
+      address to = 0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8; // dummy
       // address to = YearnController(controller).feesOwner();
 
       IERC20(uToken).safeTransfer(to, fees);
