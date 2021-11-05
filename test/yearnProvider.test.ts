@@ -1,6 +1,6 @@
 import chai, { expect } from "chai";
 import { Signer, Wallet } from "ethers"
-import { ethers, waffle } from "hardhat";
+import { ethers, waffle , network} from "hardhat";
 import { deployYearnProvider} from "./helpers/deploy";
 import { getUSDCSigner, erc20, formatUSDC, parseUSDC, skipTimeDays } from './helpers/helpers';
 
@@ -36,9 +36,9 @@ describe("Deploy Contract and interact with Yearn", async () => {
     expect(Number(formatUSDC(balance))).to.be.closeTo(Number(formatUSDC(amountUSDC)), 2)
 
     // skip blocks
-    console.log(await ethers.provider.getBlockNumber())
-    await skipTimeDays(4)
-    console.log(await ethers.provider.getBlockNumber())
+    // console.log(await ethers.provider.getBlockNumber())
+    // await skipTimeDays(4)
+    // console.log(await ethers.provider.getBlockNumber())
 
     console.log(`-------------------------Withdraw----------------------`) 
     await yearnProvider.connect(addr1)._withdrawProvider(balance, fee);
@@ -46,7 +46,7 @@ describe("Deploy Contract and interact with Yearn", async () => {
     await yearnProvider.balance();
 
     const USDCBalance = await erc20USDC.balanceOf(addr1.address);
-    console.log(`USDC balance ${formatUSDC(USDCBalance)}`)
+    console.log(`USDC balance addr1 ${formatUSDC(USDCBalance)}`)
 
     expect(Number(formatUSDC(USDCBalance))).to.be.closeTo(Number(formatUSDC(amountUSDC)), 2)
   });
