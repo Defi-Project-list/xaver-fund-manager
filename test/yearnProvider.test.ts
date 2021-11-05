@@ -35,7 +35,7 @@ describe("Deploy Contract and interact with Yearn", async () => {
     // expect contract balance to be close to amount deposited
     expect(Number(formatUSDC(balance))).to.be.closeTo(Number(formatUSDC(amountUSDC)), 2)
 
-    // skip blocks
+    // skip blocks to test yield not working yet
     // console.log(await ethers.provider.getBlockNumber())
     // await skipTimeDays(4)
     // console.log(await ethers.provider.getBlockNumber())
@@ -45,6 +45,7 @@ describe("Deploy Contract and interact with Yearn", async () => {
     await yearnProvider.connect(addr1)._sendUnderlying(addr1.address, balance);
     await yearnProvider.balance();
 
+    // Check USDC balance to be back in addr1
     const USDCBalance = await erc20USDC.balanceOf(addr1.address);
     console.log(`USDC balance addr1 ${formatUSDC(USDCBalance)}`)
 
