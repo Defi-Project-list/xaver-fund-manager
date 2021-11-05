@@ -50,7 +50,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       forking: {
         url: `${process.env.PROVIDER_FORKING}`,
-        blockNumber: 12554401, 
+        blockNumber: 12526794, 
       },
       allowUnlimitedContractSize: true,
       throwOnTransactionFailures: true,
