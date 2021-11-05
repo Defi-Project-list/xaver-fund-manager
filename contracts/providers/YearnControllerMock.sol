@@ -11,14 +11,6 @@ import "./../oracle/IYieldOracle.sol";
 import "./../oracle/IYieldOraclelizable.sol";
 
 contract YearnControllerMock is IController, IYearnCumulator, IYieldOraclelizable {
-    // modifier onlyPool {
-    //   require(
-    //     msg.sender == pool,
-    //     "AC: only pool"
-    //   );
-    //   _;
-    // }
-    
     constructor(
       address pool_,
       address bondModel_
@@ -32,10 +24,6 @@ contract YearnControllerMock is IController, IYearnCumulator, IYieldOraclelizabl
     }
     function providerRatePerDay() public override virtual returns (uint256) {
       return IYieldOracle(oracle).consult(1 days);
-    //   return MathUtils.min(
-    //     MathUtils.min(BOND_MAX_RATE_PER_DAY, spotDailyRate()),
-    //     IYieldOracle(oracle).consult(1 days)
-    //   );
     }
 
     function _beforeCTokenBalanceChange()
