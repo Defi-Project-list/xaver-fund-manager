@@ -3,7 +3,9 @@ on: ["pull_request"]
 name: main workflow
 
 env:
-  WEB3_INFURA_PROJECT_ID: ${{ secrets.WEB3_INFURA_PROJECT_ID }}
+  PROVIDER_FORKING: ${{ secrets.PROVIDER_FORKING }}
+  MNEMONIC: ${{ secrets.MNEMONIC }}
+  INFURA_KEY: ${{ secrets.INFURA_KEY }}
 
   # increasing available memory for node reduces issues with ganache crashing
   # https://nodejs.org/api/cli.html#cli_max_old_space_size_size_in_megabytes
