@@ -1,11 +1,14 @@
 import * as dotenv from "dotenv";
 
 import { HardhatUserConfig, task } from "hardhat/config";
-import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
-import "@typechain/hardhat";
-import "hardhat-gas-reporter";
-import "solidity-coverage";
+import 'hardhat-gas-reporter';
+import 'solidity-coverage';
+import '@nomiclabs/hardhat-waffle';
+import '@nomiclabs/hardhat-etherscan';
+import '@nomiclabs/hardhat-web3';
+import 'hardhat-typechain';
+import 'hardhat-contract-sizer';
+import 'hardhat-abi-exporter';
 
 dotenv.config();
 
@@ -23,27 +26,56 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
-  solidity: "0.7.6",
+
+  solidity: {
+    version: '0.7.6',
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 9999,
+      },
+    },
+  },
   networks: {
     ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: `${process.env.INFURA_KEY}`,
+      accounts: {
+        mnemonic: process.env.MNEMONIC
+      },
+      chainId: 3,
+      gas: 25000000,
+      blockGasLimit: 0x1fffffffffffff,
     },
+    
     hardhat: {
       forking: {
-        url: process.env.WEB3_INFURA_PROJECT_ID || "",
-        // blockNumber: 13475333,
+        url: `${process.env.PROVIDER_FORKING}`,
+        blockNumber: 12526794, 
       },
+      allowUnlimitedContractSize: true,
+      throwOnTransactionFailures: true,
+      throwOnCallFailures: true,
+      gas: 25000000,
+      blockGasLimit: 0x1fffffffffffff,
+      chainId: 1,
+      gasMultiplier: 1.5,
+      gasPrice: 1000000000, 
+      
     },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
     currency: "USD",
   },
+  
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
+  mocha: {
+    timeout: 1000000
+  },
+  
+  
 };
 
 export default config;

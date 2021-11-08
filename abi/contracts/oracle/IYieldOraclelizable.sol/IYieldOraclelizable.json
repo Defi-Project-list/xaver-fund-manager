@@ -1,0 +1,15 @@
+[
+  {
+    "inputs": [],
+    "name": "cumulatives",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "cumulativeYield",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
