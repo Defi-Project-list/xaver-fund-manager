@@ -49,7 +49,7 @@ const config: HardhatUserConfig = {
     
     hardhat: {
       forking: {
-        url: `${process.env.INFURA_KEY}`,
+        url: `${process.env.PROVIDER_FORKING}`,
         blockNumber: 12526794, 
       },
       allowUnlimitedContractSize: true,
