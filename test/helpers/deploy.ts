@@ -29,6 +29,12 @@ import { YearnProviderMock } from '@typechain/YearnProviderMock';
 import YearnControllerMockArtifact from './../../artifacts/contracts/providers/YearnControllerMock.sol/YearnControllerMock.json';
 import { YearnControllerMock } from '@typechain/YearnControllerMock';
 
+import YearnProviderArtifact from './../../artifacts/contracts/providers/YearnProvider.sol/YearnProvider.json';
+import { YearnProvider } from '@typechain/YearnProvider';
+
+export const deployYearnProvider = (deployerSign: Wallet, yTokenAddress: string , uTokenAddress: string): Promise<YearnProvider> => {
+  return (deployContract(deployerSign, YearnProviderArtifact, [yTokenAddress, uTokenAddress])) as Promise<YearnProvider>;
+};
 
 export const deployYearnProviderMock = (deployerSign: Wallet): Promise<YearnProviderMock> => {
   return (deployContract(deployerSign, YearnProviderMockArtifact, [])) as Promise<YearnProviderMock>;
