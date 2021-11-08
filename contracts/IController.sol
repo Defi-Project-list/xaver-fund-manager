@@ -8,7 +8,7 @@ import "./ISmartYield.sol";
 
 abstract contract IController is Governed {
 
-    uint256 public constant EXP_SCALE = 1e18;
+    uint256 public constant EXP_SCALE = 1e6;
 
     address public pool; // compound provider pool
 
